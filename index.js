@@ -1,72 +1,109 @@
-const employee = require('./lib/Employee');
-const manager = require('./lib/Manager');
-const intern = require('./lib/Intern');
-const engineer = require('./lib/Engineer');
+const Manager = require('./lib/Manager');
+const Intern = require('./lib/Intern');
 const fileSystem = require('fs');
 const inquirer = require('inquirer');
+const Engineer = require('./lib/Engineer');
+const generateHTML = require('./src/buildHTML');
 const employeeList = [];
 
-const generateHTML = (employeeHTML) =>
-	`<!DOCTYPE html>
-  <html lang="en">
-  <head>
-      <meta charset="UTF-8">
-      <meta http-equiv="X-UA-Compatible" content="IE=edge">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <link rel="stylesheet"  href="assets/css/style.css"/>
-      <title>Employee Management</title>
-  </head>
-  <body>
-      
-  </body>
-  </html>`;
-
-
 const employeeQuestions = [
-	{
-		name: 'name',
-		message: 'What is the employee name?',
-		type: 'input',
-	},
-	{
-		name: 'id',
-		message: 'what is the employee Id?',
-		type: 'input',
-	},
-	{
-		name: 'role',
-		message: 'What is the employees role?',
-		type: 'list',
-		choices: ['Manager', 'Engineer', 'Intern'],
-	},
+	[
+		{
+			name: 'name',
+			message: 'What is the employee name?',
+			type: 'input',
+		},
+		{
+			name: 'id',
+			message: 'what is the employee Id?',
+			type: 'input',
+		},
+		{
+			name: 'email',
+			message: 'What is the email?',
+			type: 'input',
+		}
+	],
+	[
+		{
+			name: 'officeNumber',
+			message: 'What is the office number?',
+			type: 'input',
+		}
+	],
+	[
+		{
+			name: 'role',
+			message: 'What is the employees role?',
+			type: 'list',
+			choices: ['Engineer', 'Intern', 'do not add any more'],
+		}
+	],
+	[
+		{
+			name: 'gitHub',
+			message: 'What is the employees github link?',
+			type: 'input',
+		}
+	],
+	[
+		{
+			name: 'school',
+			message: 'What is the name of the employees school?',
+			type: 'input',
+		}
+	]
 ];
 
-function generateQuestions() {
-	inquirer.prompt(employeeQuestions).then((employeeInfo) => {
-		if (employeeInfo.role === 'Manager') {
-			inquirer.prompt([
-				{
-					name: 'officeNumber',
-					message: 'What is the office number?',
-					type: 'input',
-				},
-			]).then((thirdQuestion) => {});
-		} else if (employeeInfo.role === 'Engineer') {
-			inquirer.prompt([
-				{
-					name: 'github',
-					message: 'What is the employees github link?',
-					type: 'input',
-				},
-			]).then((thirdQuestion) => {});
+function generateRole() {
+	inquirer.prompt(employeeQuestions[2]).then((employeeInfo) => {
+		if (employeeInfo.role === 'Engineer') {
+			generateQuestions(employeeInfo.role);
+		} else if (employeeInfo.role === 'Intern') {
+			generateQuestions(employeeInfo.role);
 		} else {
-			inquirer.prompt([
-				{
-					name: 'school',
-					message: 'What school is the employee attending?',
-					type: 'input',
-				},
-			]).then((thirdQuestion) => {});
+			const htmlFile = generateHTML(employeeList);
+			fileSystem.writeToFile('index.html', htmlFile, (err) => {
+				console.log(err);
+			});
 		}
+	});
+}
+
+function generateQuestions(role) {
+	inquirer.prompt(employeeQuestions[0]).then((employeeInfo) => {
+		const employee1 = employeeInfo;
+		if (!employeeList.length) {
+			inquirer.prompt(employeeQuestions[1]).then((employee) => {
+				const manager = new Manager(
+					employee1.name,
+					employee1.id,
+					employee1.email,
+					employee.officeNumber
+				);
+				employeeList.push(manager);
+			});
+		} else if (role === 'Engineer') {
+			inquirer.prompt(employeeQuestions[3]).then((employee) => {
+				const engineer = new Engineer(
+					employee1.name,
+					employee1.id,
+					employee1.email,
+					employee.gitHub
+				);
+				employeeList.push(engineer);
+			});
+		} else if (role === 'Intern') {
+			inquirer.prompt(employeeQuestions[4]).then((employee) => {
+				const intern = new Intern(
+					employee1.name,
+					employee1.id,
+					employee1.email,
+					employee.school
+				);
+				employeeList.push(intern);
+			});
+		}
+		generateRole();
 	});
 }
