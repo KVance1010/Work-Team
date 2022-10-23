@@ -57,14 +57,13 @@ const employeeQuestions = [
 
 function generateRole() {
 	inquirer.prompt(employeeQuestions[2]).then((employeeInfo) => {
-		console.log(employeeInfo.role);
 		if (employeeInfo.role === 'Engineer') {
 			generateQuestions(employeeInfo.role);
 		} else if (employeeInfo.role === 'Intern') {
 			generateQuestions(employeeInfo.role);
-		} else {
+		} else if (employeeInfo.role === 'do not add any more to your team'){
 			const htmlFile = generateHTML(employeeList);
-			fileSystem.writeToFile('dist/index.html', htmlFile, (err) => {
+			fileSystem.writeFile('./dist/index.html', htmlFile, (err) => {
 				console.log(err);
 			});
 		}
@@ -74,7 +73,7 @@ function generateRole() {
 function generateQuestions(role) {
 	inquirer.prompt(employeeQuestions[0]).then((employeeInfo) => {
 		const employee1 = employeeInfo;
-		if (!employeeList.length) {
+		if (role === 'Manager') {
 			inquirer.prompt(employeeQuestions[1]).then((employee) => {
 				const manager = new Manager(
 					employee1.name,
@@ -82,8 +81,8 @@ function generateQuestions(role) {
 					employee1.email,
 					employee.officeNumber
 				);
-				console.log(manager);
 				employeeList.push(manager);
+				generateRole();
 			});
 		} else if (role === 'Engineer') {
 			inquirer.prompt(employeeQuestions[3]).then((employee) => {
@@ -94,6 +93,7 @@ function generateQuestions(role) {
 					employee.gitHub
 				);
 				employeeList.push(engineer);
+				generateRole();
 			});
 		} else if (role === 'Intern') {
 			inquirer.prompt(employeeQuestions[4]).then((employee) => {
@@ -104,10 +104,10 @@ function generateQuestions(role) {
 					employee.school
 				);
 				employeeList.push(intern);
+				generateRole();
 			});
 		}
-		generateRole();
 	});
 }
 
-generateQuestions();
+generateQuestions('Manager');

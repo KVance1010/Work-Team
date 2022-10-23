@@ -20,7 +20,7 @@ let htmlText = `<!DOCTYPE html>
 
 <body>
     <h1>Team Members</h1>
-    <div class="container"></div>
+    <div class="container">
     
     `
 
@@ -53,7 +53,7 @@ htmlText +=
     <ul class="list-group list-group-flush">
         <li class="list-group-item">ID: ${employee.getID}</li>
         <li class="list-group-item">Email: <a href = ${employee.getEmail}>Send Email</a></li>
-        <li class="list-group-item">GitHub: ${employee.getGitHub}</li>
+        <li class="list-group-item">GitHub: <a href = ${employee.getGitHub}>goto Profile</a></li>
     </ul>
   </div>
   
