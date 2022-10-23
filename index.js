@@ -11,59 +11,60 @@ const employeeQuestions = [
 		{
 			name: 'name',
 			message: 'What is the employee name?',
-			type: 'input',
+			type: 'input'
 		},
 		{
 			name: 'id',
 			message: 'what is the employee Id?',
-			type: 'input',
+			type: 'input'
 		},
 		{
 			name: 'email',
 			message: 'What is the email?',
-			type: 'input',
+			type: 'input'
 		}
 	],
 	[
 		{
 			name: 'officeNumber',
 			message: 'What is the office number?',
-			type: 'input',
+			type: 'input'
 		}
 	],
 	[
 		{
 			name: 'role',
-			message: 'What is the employees role?',
+			message: 'Add a new employee?',
 			type: 'list',
-			choices: ['Engineer', 'Intern', 'do not add any more'],
+			choices: ['Engineer', 'Intern', 'do not add any more to your team']
 		}
 	],
 	[
 		{
 			name: 'gitHub',
 			message: 'What is the employees github link?',
-			type: 'input',
+			type: 'input'
 		}
 	],
 	[
 		{
 			name: 'school',
 			message: 'What is the name of the employees school?',
-			type: 'input',
+			type: 'input'
 		}
 	]
 ];
 
 function generateRole() {
 	inquirer.prompt(employeeQuestions[2]).then((employeeInfo) => {
+		console.log(employeeInfo.role);
 		if (employeeInfo.role === 'Engineer') {
 			generateQuestions(employeeInfo.role);
 		} else if (employeeInfo.role === 'Intern') {
 			generateQuestions(employeeInfo.role);
 		} else {
 			const htmlFile = generateHTML(employeeList);
-			fileSystem.writeToFile('index.html', htmlFile, (err) => {
+			fileSystem.writeToFile('dist/index.html', htmlFile, (err) => {
 				console.log(err);
 			});
 		}
@@ -81,6 +82,7 @@ function generateQuestions(role) {
 					employee1.email,
 					employee.officeNumber
 				);
+				console.log(manager);
 				employeeList.push(manager);
 			});
 		} else if (role === 'Engineer') {
@@ -107,3 +109,5 @@ function generateQuestions(role) {
 		generateRole();
 	});
 }
+
+generateQuestions();

@@ -1,0 +1,54 @@
+* {
+	box-sizing: border-box;
+}
+
+h1{
+    text-align: center;
+    height: 80px;
+    background-color:darkblue;
+    color:chocolate;
+    font-size: 60px;
+    margin-bottom: 40px;
+}
+.container{
+    display: flex;
+    flex-wrap: wrap;
+}
+.card{
+    margin: 30px;
+    min-width: 150px;
+}
+
+/* Manager Cards */
+.manager{ 
+    background-color: lightgreen;
+}
+.manager_header *{
+    color:darkblue;
+}
+.manager_header h2{
+   font-weight: bold;
+}
+
+
+/* Engineer Cards */
+.engineer{ 
+    background-color: lightblue;
+}
+.engineer_header *{
+    color:darkblue;
+}
+.engineer_header h2{
+   font-weight: bold;
+}
+
+/* Intern Cards */
+.intern{ 
+    background-color: lightskyblue;
+}
+.intern_header *{
+    color:darkblue;
+}
+.intern_header h2{
+   font-weight: bold;
+}
