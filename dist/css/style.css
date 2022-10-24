@@ -52,3 +52,7 @@ h1{
 .intern_header h2{
    font-weight: bold;
 }
+
+body{
+    background-color: cadetblue;
+}

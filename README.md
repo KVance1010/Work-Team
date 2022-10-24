@@ -1,6 +1,52 @@
-# Work-Team
+# Team builder
 
+![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 
+## Description
+
+This is a Team Profile Generator. This program uses the prompts in the terminal to ask questions of the users team to help build an html page of the users team. The application uses Jest for test and Inquirer  to collect the users information.  
+
+### Table of Contents
+
+- [Installation](#installation)
+- [Usage](#usage)
+- [Technologies](#technologies)
+- [User-Story](#user-story)
+- [Acceptance-Criteria](#acceptance-criteria)
+- [Screenshots](#screenshots)
+- [CodeSnippets](#codeSnippets)
+- [License](#license)
+- [Contributors](#contributors)
+- [Tests](#tests)
+- [Questions](#questions)
+
+## Installation
+
+install Inquirer and Jest with NPM
+
+## Usage
+
+- Using the command line run npm index.js. 
+- Answer all the prompts.
+- When finished added employee select not to add any more in the prompts.
+- The HTML page will automatically generate in the Dist folder.
+- Open the HTML file in a browser and you will have a functional webpage.
+
+## Technologies
+
+- **Jest.js**
+- **Inquirer.js**
+- **Bootstrap**
+- **JavaScript**
+- **HTML**
+- **CSS**
+
+## Learning-Objectives
+
+- Create scalable application through OOP
+- Create object with constructors
+- Become accustom to test driven development
+- Learn about inheritance
 
 ## User Story
 
@@ -32,50 +78,65 @@ WHEN I click on the GitHub username
 THEN that GitHub profile opens in a new tab
 ```
 
+## Screenshots
 
-**Important**: Make sure that you remove `dist` from the `.gitignore` file so that Git will track this folder and include it when you push up to your application's repository.
+![Employee list](./dist/images/team.jpg)
 
-The application must include `Employee`, `Manager`, `Engineer`, and `Intern` classes. The tests for these classes (in the `_tests_` directory) must ALL pass.
+## CodeSnippets
 
-The first class is an `Employee` parent class with the following properties and methods:
+### Testing the Manager Object with Jest.js
 
-* `name`
+```JavaScript
+describe('Manager Test', () => {
+	test('create a new manager and test the different values', () => {
+		const manager = new managerTest("Robert Smith", 1,"cure@gmail.com", "867-5309");
+        expect(manager.getName).toEqual("Robert Smith");
+        expect(manager.getEmail).toEqual('"mailto: cure@gmail.com"');
+        expect(manager.getOfficeNumber).toEqual("867-5309");
+        expect(manager.getId).toEqual(1);
+        expect(manager.getRole).toEqual("Manager");
+	});
+});
+```
 
-* `id`
+### Creates a new employee and controls what type of employee is created
 
-* `email`
+```JavaScript
+function generateRole() {
+	inquirer.prompt(employeeQuestions[2]).then((employeeInfo) => {
+		if (employeeInfo.role === 'Engineer') {
+			generateQuestions(employeeInfo.role);
+		} else if (employeeInfo.role === 'Intern') {
+			generateQuestions(employeeInfo.role);
+		} else if (employeeInfo.role === 'do not add any more to your team'){
+			const htmlFile = generateHTML(employeeList);
+			fileSystem.writeFile('./dist/index.html', htmlFile, (err) => {
+				console.log(err);
+			});
+		}
+	});
+}
 
-* `getName()`
+```
 
-* `getId()`
+## License
 
-* `getEmail()`
+The license used on this project was MIT license
 
-* `getRole()`&mdash;returns `'Employee'`
+[license link](https://opensource.org/licenses/MIT)
 
-The other three classes will extend `Employee`.
+## Contributors
 
-In addition to `Employee`'s properties and methods, `Manager` will also have the following:
+Kyle Vance
 
-* `officeNumber`
+## Tests
 
-* `getRole()`&mdash;overridden to return `'Manager'`
+Jest was used for all testing
 
-In addition to `Employee`'s properties and methods, `Engineer` will also have the following:
+## Questions
 
-* `github`&mdash;GitHub username
+If you have any questions regarding this project, please reach me by email at vanceofalifetime@protonmail.com
 
-* `getGithub()`
+[GitHub](https://github.com/KVance1010)
 
-* `getRole()`&mdash;overridden to return `'Engineer'`
-
-In addition to `Employee`'s properties and methods, `Intern` will also have the following:
-
-* `school`
-
-* `getSchool()`
-
-* `getRole()`&mdash;overridden to return `'Intern'`
-
-Finally, although it’s not a requirement, consider adding validation to ensure that user input is in the proper format.
-
+[LinkedIn](https://www.linkedin.com/in/kyle-s-vance/)

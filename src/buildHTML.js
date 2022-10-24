@@ -1,4 +1,5 @@
-let htmlText = `<!DOCTYPE html>
+
+jlet htmlText = `<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -53,7 +54,7 @@ htmlText +=
     <ul class="list-group list-group-flush">
         <li class="list-group-item">ID: ${employee.getID}</li>
         <li class="list-group-item">Email: <a href = ${employee.getEmail}>Send Email</a></li>
-        <li class="list-group-item">GitHub: <a href = ${employee.getGitHub}>goto Profile</a></li>
+        <li class="list-group-item">GitHub: <a href = ${employee.getGitHub}>go-to Profile</a></li>
     </ul>
   </div>
   
