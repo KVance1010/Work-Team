@@ -1,4 +1,4 @@
-const engineerTest = require('../lib/Engineer.js');
+const engineerTest = require('../lib/Engineer');
 
 describe('Engineer Test', () => {
 	test('create a new engineer and test the different values', () => {

@@ -84,7 +84,7 @@ THEN that GitHub profile opens in a new tab
 
 ## CodeSnippets
 
-### Testing the Manager Object with Jest.js
+### Tests the Manager Object with Jest.js
 
 ```JavaScript
 describe('Manager Test', () => {
@@ -99,7 +99,7 @@ describe('Manager Test', () => {
 });
 ```
 
-### Creates a new employee and controls what type of employee is created
+### Creates a new employee
 
 ```JavaScript
 function generateRole() {
@@ -137,6 +137,6 @@ Jest was used for all testing
 
 If you have any questions regarding this project, please reach me by email at vanceofalifetime@protonmail.com
 
-[GitHub](https://github.com/KVance1010)
+[Video Link](https://drive.google.com/file/d/1cxPXwK-qerZZVJT_8dGR0MmjCNeV9jdb/view)
 
 [LinkedIn](https://www.linkedin.com/in/kyle-s-vance/)

@@ -1,4 +1,4 @@
-const internTest = require('../lib/intern.js');
+const internTest = require('../lib/intern');
 
 describe('Intern Test', () => {
 	test('create a new intern and test the different values', () => {
